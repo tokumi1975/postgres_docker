@@ -1,0 +1,4 @@
+psql << EOSQL
+  CREATE DATABASE testdb;
+  GRANT ALL PRIVILEGFES ON DATABASE testdb TO postgres;
+EOSQL
