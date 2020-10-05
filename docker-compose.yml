@@ -2,8 +2,20 @@ version: '3'
 services:
   db:
     build: .
+    container_name: postgres-db
     ports:
       - 5433:5432
+    volumes:
+      - test-db:/var/lib/postgresql/data
+      - ./initdb:/docker-entrypoint-initdb.d
     environment:
-      POSTGRES_USER: admin
-      POSTGRES_PASSWORD: admin
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: 'pass'
+      POSTGRES_DB: 'test-db'
+      PGDATA: /var/lib/postgresql/data/pgdata
+volumes:
+  test-db:
+    driver_opts:
+      type: none
+      device: /home/tokumi/volumes/postgres/test-db
+      o: bind
