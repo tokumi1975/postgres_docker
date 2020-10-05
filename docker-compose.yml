@@ -2,8 +2,16 @@ version: '3'
 services:
   db:
     build: .
+    container_name: postgres
     ports:
       - 5433:5432
+    volumes:
+      - test-db:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
+volumes:
+  test-db:
+    driver_opts:
+      type: none
+      device: /home/tokumi/volumes/postgres/test_db
